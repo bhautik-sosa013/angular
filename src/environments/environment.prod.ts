@@ -1,8 +1,10 @@
+// Buildr-managed file — regenerated from grep'd `environment.X` references
+// in src/. Leaves carry user-submitted values when present, '' otherwise.
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://api.example.com/api',
-  appName: 'TODO App',
-  appVersion: '1.0.0',
-  enableAnalytics: false,
-  maxTodoItems: 500,
+  apiBaseUrl: 'kjnb',
+  appName: 'kljn',
+  appVersion: 'klj',
+  enableAnalytics: 'kjnmb',
+  maxTodoItems: 'kjnb'
 };

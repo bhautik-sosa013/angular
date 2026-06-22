@@ -8,6 +8,14 @@ import { environment } from '../../environments/environment';
 
 const STORAGE_KEY = 'todo_app_data';
 
+// `environment.maxTodoItems` is populated from a public env value (string).
+// Coerce to a number here with a sensible fallback when the value is missing/invalid.
+const DEFAULT_MAX_TODOS = 100;
+function resolveMaxTodoItems(): number {
+  const parsed = Number(environment.maxTodoItems);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : DEFAULT_MAX_TODOS;
+}
+
 const SAMPLE_TODOS: Todo[] = [
   {
     id: 'todo-1',
@@ -120,7 +128,7 @@ export class TodoService {
 
   addTodo(todo: Omit<Todo, 'id' | 'createdAt' | 'updatedAt'>): Todo | null {
     const current = this.todos$.value;
-    if (current.length >= environment.maxTodoItems) {
+    if (current.length >= resolveMaxTodoItems()) {
       return null;
     }
     const newTodo: Todo = {
@@ -171,10 +179,10 @@ export class TodoService {
   }
 
   getMaxLimit(): number {
-    return environment.maxTodoItems;
+    return resolveMaxTodoItems();
   }
 
   isAtLimit(): Observable<boolean> {
-    return this.todos$.pipe(map((t) => t.length >= environment.maxTodoItems));
+    return this.todos$.pipe(map((t) => t.length >= resolveMaxTodoItems()));
   }
 }
