@@ -92,6 +92,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "allowedHosts": [".projectcode.dev", ".localhost"]
+          },
           "configurations": {
             "production": {
               "buildTarget": "todo-app:build:production"
